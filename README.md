@@ -73,7 +73,40 @@ docker run -it my_project
 - 左右目的重投影误差。
 - 旋转矩阵 $R$ 和平移向量 $t$。
 - 基础矩阵 $F$。
+```sh
+左目误差: 154.00519379539307, 右目误差: 169.93333315126154
+旋转矩阵 R: 
+[[ 0.01190404  0.78862709  0.61475654]
+ [-0.93817422  0.2215192  -0.26600445]
+ [-0.34595869 -0.57358221  0.74250658]]
+平移向量 t: 
+[-0.33748408  0.13266717 -0.93193557]
+基础矩阵 F: 
+[[ 4.15596299e-08 -5.88681317e-09 -1.16785445e-04]
+ [ 5.77405297e-09  4.19348984e-08 -6.38354707e-05]
+ [-2.45950687e-04 -4.82223062e-05  7.83635714e-01]]
+```
 - 可视化结果：包括原始图像、重投影图像以及三维点的空间分布。
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="output/2D.png">
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">二维图像</div>
+</center>
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="output/3D.png">
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">三维图像</div>
+</center>
 
 # 依赖库
 
