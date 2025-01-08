@@ -10,13 +10,6 @@
 pip install -r requirements.txt
 ```
 
-## 使用 Docker 构建和运行容器
-
-```sh
-docker build -t my_project .
-docker run -it my_project
-```
-
 # 项目结构
 
 ```
