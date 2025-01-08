@@ -289,6 +289,27 @@ def find_valid_R_t(R_list, t_list, left_matrix, right_matrix, K):
                 return R, t, points_3d
     return None, None, None  # 如果没有找到满足条件的 R 和 t
 
+def rotation_matrix_to_euler_angles(R):
+    """
+    将旋转矩阵 R 转换为欧拉角（ZYX顺序）
+    :param R: 3x3 旋转矩阵
+    :return: 欧拉角 (yaw, pitch, roll) 以弧度表示
+    """
+    sy = np.sqrt(R[0, 0] ** 2 + R[1, 0] ** 2)  # 计算旋转矩阵第一列的模长
+    
+    singular = sy < 1e-6  # 判断旋转矩阵是否接近奇异（接近零）
+
+    if not singular:
+        yaw = np.arctan2(R[1, 0], R[0, 0])  # 计算偏航角（yaw）
+        pitch = np.arctan2(-R[2, 0], sy)    # 计算俯仰角（pitch）
+        roll = np.arctan2(R[2, 1], R[2, 2]) # 计算翻滚角（roll）
+    else:
+        yaw = np.arctan2(-R[1, 2], R[1, 1]) # 在奇异情况下计算偏航角（yaw）
+        pitch = np.arctan2(-R[2, 0], sy)    # 在奇异情况下计算俯仰角（pitch）
+        roll = 0  # 在奇异情况下翻滚角（roll）为零
+
+    return yaw, pitch, roll  # 返回计算得到的偏航角、俯仰角和翻滚角
+
 # 可视化
 def visualize(points_3d, left_points, right_points, projected_left, projected_right, t):
     """
@@ -374,10 +395,16 @@ def main():
 
     # 计算重投影误差
     left_error, right_error, projected_left, projected_right = compute_reprojection_error(points_3d, left_matrix, right_matrix, K, R, t)  # 计算重投影误差
-   
-    #输出结果
+    
+    # 转换为欧拉角
+    yaw, pitch, roll = rotation_matrix_to_euler_angles(R)
+
+    # 输出结果
     print(f"左目误差: {left_error}, 右目误差: {right_error}")  # 打印左右目重投影误差
     print(f"旋转矩阵 R: \n{R}")  # 打印旋转矩阵
+    print(f"Yaw (偏航角): {np.degrees(yaw):.2f}°") # 打印偏航角
+    print(f"Pitch (俯仰角): {np.degrees(pitch):.2f}°") # 打印俯仰角
+    print(f"Roll (滚转角): {np.degrees(roll):.2f}°") # 打印滚转角
     print(f"平移向量 t: \n{t}")  # 打印平移向量
     print(f"基础矩阵 F: \n{F}")  # 打印基础矩阵
     visualize(points_3d,left_matrix, right_matrix, projected_left, projected_right,t)  # 可视化重投影后的图像和三维点
