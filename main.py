@@ -1,7 +1,6 @@
 import numpy as np  # 导入NumPy库，用于数值计算
 import matplotlib.pyplot as plt  # 导入Matplotlib库，用于绘图
 import cv2  # 导入OpenCV库，用于图像处理
-from sklearn.utils import check_random_state  # 导入check_random_state函数，用于生成随机数
 from src.getpoints import get_points  # 导入get_points函数，用于获取特征点
 
 # 读取数据
@@ -158,7 +157,7 @@ def find_essential_mat_ransac(left_points, right_points, camera_matrix, prob=0.9
     best_inliers = None  # 初始化最佳内点索引
     best_num_inliers = 0  # 初始化最佳内点数量
     
-    rng = check_random_state(0)  # 初始化随机数生成器
+    rng = np.random.RandomState(0)  # 初始化随机数生成器
     
     for _ in range(max_iters):  # 进行最大迭代次数的循环
         indices = rng.choice(len(left_norm), model_points, replace=False)  # 随机选择 model_points 个点
@@ -361,8 +360,8 @@ def main():
 
     # 计算本质矩阵 E
     # E,_=cv2.findEssentialMat(left_matrix,right_matrix,K) # OpenCV方法，精度最高
-    E = compute_essential_matrix(left_norm,right_norm)  # 应用所有点计算本质矩阵，精度次之
-    # E,_=find_essential_mat_ransac(left_matrix,right_matrix,K) # 待完善的RANSAC方法，精度最低
+    # E = compute_essential_matrix(left_norm,right_norm)  # 应用所有点计算本质矩阵，精度次之
+    E,_=find_essential_mat_ransac(left_matrix,right_matrix,K) # 待完善的RANSAC方法，精度最低
     
     # 计算基础矩阵 F
     F=compute_fundamental_matrix(E,K)
