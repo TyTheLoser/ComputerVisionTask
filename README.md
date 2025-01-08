@@ -87,25 +87,15 @@ docker run -it my_project
  [-2.45950687e-04 -4.82223062e-05  7.83635714e-01]]
 ```
 - 可视化结果：包括原始图像、重投影图像以及三维点的空间分布。
+
+![](output/2D.png)
 <center>
-    <img style="border-radius: 0.3125em;
-    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
-    src="output/2D.png">
-    <br>
-    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
-    display: inline-block;
-    color: #999;
-    padding: 2px;">二维图像</div>
+    二维图像
 </center>
+
+![](output/3D.png)
 <center>
-    <img style="border-radius: 0.3125em;
-    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
-    src="output/3D.png">
-    <br>
-    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
-    display: inline-block;
-    color: #999;
-    padding: 2px;">三维图像</div>
+    三维图像
 </center>
 
 # 依赖库
