@@ -2,7 +2,7 @@ import numpy as np  # 导入NumPy库，用于数值计算
 import matplotlib.pyplot as plt  # 导入Matplotlib库，用于绘图
 import cv2  # 导入OpenCV库，用于图像处理
 from sklearn.utils import check_random_state  # 导入check_random_state函数，用于生成随机数
-from getpoints import get_points  # 导入get_points函数，用于获取特征点
+from src.getpoints import get_points  # 导入get_points函数，用于获取特征点
 
 # 读取数据
 def read_data(file_path):
@@ -339,22 +339,21 @@ def main():
     主函数，执行整个流程。
     """
     # 获取点坐标（该功能仅能够提取点坐标，但无法进行匹配）
-    # left_image = cv2.imread("./0.JPG",cv2.IMREAD_GRAYSCALE)
-    # right_image = cv2.imread("./1.JPG",cv2.IMREAD_GRAYSCALE)
+    # left_image = cv2.imread("data/0.JPG",cv2.IMREAD_GRAYSCALE)
+    # right_image = cv2.imread("data/1.JPG",cv2.IMREAD_GRAYSCALE)
     # get_points(left_image,right_image,display=True)
     
     # 提取特征点
-    data = read_data('./1.pix')  # 从文件中读取数据
+    data = read_data('data/1.pix')  # 从文件中读取数据
     left_points, right_points = extract_points(data)  # 从数据中提取左右目特征点
     matched_points = match_points(left_points, right_points)  # 匹配左右目特征点
     left_matrix, right_matrix = create_point_matrix(matched_points)  # 将匹配的特征点转换为矩阵形式
 
     # 引入内参矩阵
-    K = np.array([
-        [4705.5337, 0, 3944.07],
-        [0, 4705.5337, 2612.675],
-        [0, 0, 1]
-    ])
+    K = np.array([[4705.5337, 0, 3944.07],
+                [0, 4705.5337, 2612.675],
+                [0, 0, 1]])
+
 
     #归一化特征点
     left_norm = normalize_points(left_matrix, K)  # 归一化左目特征点
