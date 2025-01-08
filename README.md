@@ -89,14 +89,8 @@ docker run -it my_project
 - 可视化结果：包括原始图像、重投影图像以及三维点的空间分布。
 
 ![](output/2D.png)
-<center>
-    二维图像
-</center>
 
 ![](output/3D.png)
-<center>
-    三维图像
-</center>
 
 # 依赖库
 
