@@ -381,8 +381,8 @@ def main():
 
     # 计算本质矩阵 E
     # E,_=cv2.findEssentialMat(left_matrix,right_matrix,K) # OpenCV方法，精度最高
-    E = compute_essential_matrix(left_norm,right_norm)  # 应用所有点计算本质矩阵，精度次之
-    # E,_=find_essential_mat_ransac(left_matrix,right_matrix,K) # 待完善的RANSAC方法，精度最低
+    # E = compute_essential_matrix(left_norm,right_norm)  # 应用所有点计算本质矩阵，精度次之
+    E,_=find_essential_mat_ransac(left_matrix,right_matrix,K) # 待完善的RANSAC方法，精度最低
     
     # 计算基础矩阵 F
     F=compute_fundamental_matrix(E,K)

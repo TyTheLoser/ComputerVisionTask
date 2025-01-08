@@ -49,6 +49,8 @@ def get_points(left_image, right_image, area_threshold=1000, display=False):
             right_centers_image = cv2.circle(right_centers_image, right_center, 20, (255, 255, 255), -1)  # 在右图像上绘制质心
         cv2.imshow("Left Points", left_centers_image)  # 显示左图像的质心
         cv2.imshow("Right Points", right_centers_image)  # 显示右图像的质心
+        cv2.imwrite("output/left_centers.png", left_centers_image)  # 保存左图像的质心图像
+        cv2.imwrite("output/right_centers.png", right_centers_image)  # 保存右图像的质心图像
         cv2.waitKey(0)  # 等待按键
         cv2.destroyAllWindows()  # 关闭所有窗口
 
